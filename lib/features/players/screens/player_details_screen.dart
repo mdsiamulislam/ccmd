@@ -1,13 +1,30 @@
+import 'package:ccmd/core/models/player_model.dart';
+import 'package:ccmd/features/landing/controllers/landing_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:get/get.dart';
 
 class PlayerDetailsScreen extends StatelessWidget {
-  const PlayerDetailsScreen({super.key});
+  final Player? player;
+
+  const PlayerDetailsScreen({super.key, this.player});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final landingController = Get.find<LandingController>();
+
+    final p = player ?? (landingController.players.isNotEmpty ? landingController.players.first : null);
+
+    final club = p != null ? landingController.clubs.firstWhereOrNull((c) => c.id == p.clubId) : null;
+    final clubName = club?.name ?? 'Unknown Club';
+    final initials = p != null && p.name.isNotEmpty ? p.name.substring(0, 2).toUpperCase() : 'MR';
+    final playerName = p?.name ?? 'Mustafizur Rahman';
+    final regId = p?.registrationId ?? 'REG-1042';
+    final dob = p?.dateOfBirth ?? '6 Sep 1995';
+    final nationality = p?.nationality ?? 'Bangladeshi';
+    final playerType = p?.playerType ?? 'Bowler';
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +42,6 @@ class PlayerDetailsScreen extends StatelessWidget {
           ),
         ),
       ),
-
       body: SafeArea(
         top: false,
         child: SingleChildScrollView(
@@ -38,9 +54,6 @@ class PlayerDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // ----------------------------------------------------------------
-              // PLAYER HEADER
-              // ----------------------------------------------------------------
               Column(
                 children: [
                   Container(
@@ -55,7 +68,7 @@ class PlayerDetailsScreen extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: Text(
-                      'MR',
+                      initials,
                       style: TextStyle(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w600,
@@ -63,21 +76,17 @@ class PlayerDetailsScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   SizedBox(height: 8.h),
-
                   Text(
-                    'Mustafizur Rahman',
+                    playerName,
                     textAlign: TextAlign.center,
                     style: textTheme.titleLarge?.copyWith(
                       fontSize: 20.sp,
                     ),
                   ),
-
                   SizedBox(height: 2.h),
-
                   Text(
-                    'Abahani Limited · Local Player',
+                    '$clubName · $playerType Player',
                     textAlign: TextAlign.center,
                     style: textTheme.bodySmall?.copyWith(
                       fontSize: 12.sp,
@@ -85,12 +94,7 @@ class PlayerDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: 20.h),
-
-              // ----------------------------------------------------------------
-              // PLAYER INFORMATION
-              // ----------------------------------------------------------------
               Card(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -101,24 +105,38 @@ class PlayerDetailsScreen extends StatelessWidget {
                     children: [
                       _InfoRow(
                         label: 'Registration ID',
-                        value: 'REG-1042',
+                        value: regId,
                       ),
                       _InfoRow(
                         label: 'Date of Birth',
-                        value: '6 Sep 1995',
+                        value: dob,
                       ),
                       _InfoRow(
                         label: 'Nationality',
-                        value: 'Bangladeshi',
+                        value: nationality,
                       ),
                       _InfoRow(
                         label: 'Club',
-                        value: 'Abahani Limited',
+                        value: clubName,
                       ),
                       _InfoRow(
                         label: 'Player Type',
-                        value: 'Bowler',
+                        value: playerType,
                       ),
+                      if (p != null) ...[
+                        _InfoRow(
+                          label: 'Role',
+                          value: p.role,
+                        ),
+                        _InfoRow(
+                          label: 'Batting Style',
+                          value: p.battingStyle,
+                        ),
+                        _InfoRow(
+                          label: 'Bowling Style',
+                          value: p.bowlingStyle,
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -130,10 +148,6 @@ class PlayerDetailsScreen extends StatelessWidget {
     );
   }
 }
-
-// =============================================================================
-// INFORMATION ROW
-// =============================================================================
 
 class _InfoRow extends StatelessWidget {
   final String label;
@@ -163,9 +177,7 @@ class _InfoRow extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(width: 16.w),
-
           Flexible(
             child: Text(
               value,

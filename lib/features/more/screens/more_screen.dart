@@ -1,6 +1,9 @@
 import 'package:ccmd/core/const/asset_string.dart';
 import 'package:ccmd/core/widgets/app_snackbar.dart';
 import 'package:ccmd/features/auth/screens/login_screen.dart';
+import 'package:ccmd/features/clubs/screens/clubs_screen.dart';
+import 'package:ccmd/features/umpires/screens/umpires_screen.dart';
+import 'package:ccmd/features/venues/screens/venues_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:get/get.dart';
@@ -115,7 +118,7 @@ class MoreScreen extends StatelessWidget {
                     title: 'Clubs',
                     subtitle: 'Manage participating clubs',
                     onTap: () {
-                      AppSnackbar.info('Clubs management is not implemented yet.');
+                      Get.to(() => const ClubsScreen());
                     },
                   ),
 
@@ -126,7 +129,7 @@ class MoreScreen extends StatelessWidget {
                     title: 'Umpires',
                     subtitle: 'View and manage umpires',
                     onTap: () {
-                      AppSnackbar.info('Umpires management is not implemented yet.');
+                      Get.to(() => const UmpiresScreen());
                     },
                   ),
 
@@ -137,7 +140,7 @@ class MoreScreen extends StatelessWidget {
                     title: 'Venues',
                     subtitle: 'Manage match venues',
                     onTap: () {
-                      AppSnackbar.info('Venues management is not implemented yet.');
+                      Get.to(() => const VenuesListScreen());
                     },
                   ),
                 ],

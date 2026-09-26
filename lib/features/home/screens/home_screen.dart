@@ -8,6 +8,9 @@ import 'package:get/get.dart';
 
 import 'package:ccmd/core/models/club_model.dart';
 import 'package:ccmd/core/models/match_model.dart';
+import 'package:ccmd/features/clubs/screens/clubs_screen.dart';
+import 'package:ccmd/features/umpires/screens/umpires_screen.dart';
+import 'package:ccmd/features/venues/screens/venues_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -67,7 +70,9 @@ class HomeScreen extends StatelessWidget {
                           child: _QuickAccessItem(
                             icon: Icons.groups_outlined,
                             title: 'Clubs',
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(() => const ClubsScreen());
+                            },
                           ),
                         ),
                         _QuickAccessDivider(),
@@ -75,7 +80,9 @@ class HomeScreen extends StatelessWidget {
                           child: _QuickAccessItem(
                             icon: Icons.location_on_outlined,
                             title: 'Venues',
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(() => const VenuesListScreen());
+                            },
                           ),
                         ),
                         _QuickAccessDivider(),
@@ -83,7 +90,9 @@ class HomeScreen extends StatelessWidget {
                           child: _QuickAccessItem(
                             icon: Icons.sports_outlined,
                             title: 'Umpires',
-                            onTap: () {},
+                            onTap: () {
+                              Get.to(() => const UmpiresScreen());
+                            },
                           ),
                         ),
                       ],
