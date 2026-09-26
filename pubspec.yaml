@@ -35,6 +35,7 @@ flutter:
 
   assets:
     - assets/images/branding/
+    - assets/json/
 
 
   # fonts:

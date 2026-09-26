@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:get/get.dart';
 
+import 'package:ccmd/core/models/club_model.dart';
+import 'package:ccmd/core/models/match_model.dart';
+
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
@@ -13,191 +16,161 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final landingController = Get.find<LandingController>();
 
     return Scaffold(
-      body: SafeArea(
-        top: false,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(
-            16.w,
-            40.h,
-            16.w,
-            24.h,
+      body: Obx(() {
+        if (landingController.isLoading.value) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        return SafeArea(
+          top: false,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.fromLTRB(
+              16.w,
+              40.h,
+              16.w,
+              24.h,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Good morning',
+                  style: textTheme.bodySmall?.copyWith(
+                    fontSize: 12.sp,
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                SizedBox(height: 2.h),
+                Text(
+                  'BCB Administrator',
+                  style: textTheme.titleSmall?.copyWith(
+                    fontSize: 16.sp,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                const _TournamentCard(),
+                SizedBox(height: 20.h),
+                const _SectionTitle(title: 'QUICK ACCESS'),
+                SizedBox(height: 8.h),
+                Card(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 8.w,
+                      vertical: 10.h,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _QuickAccessItem(
+                            icon: Icons.groups_outlined,
+                            title: 'Clubs',
+                            onTap: () {},
+                          ),
+                        ),
+                        _QuickAccessDivider(),
+                        Expanded(
+                          child: _QuickAccessItem(
+                            icon: Icons.location_on_outlined,
+                            title: 'Venues',
+                            onTap: () {},
+                          ),
+                        ),
+                        _QuickAccessDivider(),
+                        Expanded(
+                          child: _QuickAccessItem(
+                            icon: Icons.sports_outlined,
+                            title: 'Umpires',
+                            onTap: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+                GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12.w,
+                  mainAxisSpacing: 10.h,
+                  childAspectRatio: 1.9,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    _StatCard(
+                      value: landingController.players.length.toString(),
+                      label: 'Players',
+                    ),
+                    _StatCard(
+                      value: landingController.clubs.length.toString(),
+                      label: 'Clubs',
+                    ),
+                    _StatCard(
+                      value: landingController.venues.length.toString(),
+                      label: 'Venues',
+                    ),
+                    _StatCard(
+                      value: landingController.umpires.length.toString(),
+                      label: 'Umpires',
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                _SectionHeader(
+                  title: 'UPCOMING MATCHES',
+                  action: 'View All',
+                  onPressed: () {
+                    landingController.curent_index.value = 2;
+                  },
+                ),
+                SizedBox(height: 8.h),
+                ...landingController.matches
+                    .where((m) => m.status == 'Upcoming')
+                    .take(2)
+                    .map((m) {
+                  final clubA = landingController.clubs.firstWhere((c) => c.id == m.clubAId);
+                  final clubB = landingController.clubs.firstWhere((c) => c.id == m.clubBId);
+                  final venue = landingController.venues.firstWhere((v) => v.id == m.venueId);
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 10.h),
+                    child: _MatchCard(
+                      teamA: clubA.name,
+                      teamB: clubB.name,
+                      date: m.date,
+                      time: m.time,
+                      venue: venue.name,
+                    ),
+                  );
+                }),
+                SizedBox(height: 10.h),
+                _SectionHeader(
+                  title: 'RECENT RESULTS',
+                  action: 'View All',
+                  onPressed: () {
+                    landingController.curent_index.value = 2;
+                  },
+                ),
+                SizedBox(height: 8.h),
+                ...landingController.matches
+                    .where((m) => m.status == 'Completed')
+                    .take(1)
+                    .map((m) {
+                  final clubA = landingController.clubs.firstWhere((c) => c.id == m.clubAId);
+                  final clubB = landingController.clubs.firstWhere((c) => c.id == m.clubBId);
+                  return _ResultCard(
+                    match: m,
+                    clubA: clubA,
+                    clubB: clubB,
+                  );
+                }),
+                SizedBox(height: 8.h),
+              ],
+            ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // -------------------------------------------------------------------
-              // GREETING
-              // -------------------------------------------------------------------
-              Text(
-                'Good morning',
-                style: textTheme.bodySmall?.copyWith(
-                  fontSize: 12.sp,
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-
-              SizedBox(height: 2.h),
-
-              Text(
-                'BCB Administrator',
-                style: textTheme.titleSmall?.copyWith(
-                  fontSize: 16.sp,
-                ),
-              ),
-
-              SizedBox(height: 16.h),
-
-              // -------------------------------------------------------------------
-              // ACTIVE TOURNAMENT
-              // -------------------------------------------------------------------
-              _TournamentCard(),
-              // -----------------------------------------------------------------------------
-// QUICK ACCESS
-// -----------------------------------------------------------------------------
-
-              SizedBox(height: 20.h),
-               _SectionTitle(
-                title: 'QUICK ACCESS',
-              ),
-
-              SizedBox(height: 8.h),
-
-              Card(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
-                    vertical: 10.h,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _QuickAccessItem(
-                          icon: Icons.groups_outlined,
-                          title: 'Clubs',
-                          onTap: () {
-                            // Navigate to Clubs
-                          },
-                        ),
-                      ),
-
-                      _QuickAccessDivider(),
-
-                      Expanded(
-                        child: _QuickAccessItem(
-                          icon: Icons.location_on_outlined,
-                          title: 'Venues',
-                          onTap: () {
-                            // Navigate to Venues
-                          },
-                        ),
-                      ),
-
-                      _QuickAccessDivider(),
-
-                      Expanded(
-                        child: _QuickAccessItem(
-                          icon: Icons.sports_outlined,
-                          title: 'Umpires',
-                          onTap: () {
-                            // Navigate to Umpires
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-
-              // -------------------------------------------------------------------
-              // QUICK STATISTICS
-              // -------------------------------------------------------------------
-              GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12.w,
-                mainAxisSpacing: 10.h,
-                childAspectRatio: 1.9,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: const [
-                  _StatCard(
-                    value: '64',
-                    label: 'Players',
-                  ),
-                  _StatCard(
-                    value: '8',
-                    label: 'Clubs',
-                  ),
-                  _StatCard(
-                    value: '2',
-                    label: 'Venues',
-                  ),
-                  _StatCard(
-                    value: '6',
-                    label: 'Umpires',
-                  ),
-                ],
-              ),
-
-              SizedBox(height: 20.h),
-
-              // -------------------------------------------------------------------
-              // UPCOMING MATCHES
-              // -------------------------------------------------------------------
-              _SectionHeader(
-                title: 'UPCOMING MATCHES',
-                action: 'View All',
-                onPressed: () {
-                  final landingController = Get.find<LandingController>();
-                  landingController.curent_index.value = 2;
-                },
-              ),
-
-              SizedBox(height: 8.h),
-
-              const _MatchCard(
-                teamA: 'Abahani',
-                teamB: 'Mohammedan',
-                date: '28 Sep',
-                time: '2:00 PM',
-                venue: 'Sher-e-Bangla',
-              ),
-
-              SizedBox(height: 10.h),
-
-              const _MatchCard(
-                teamA: 'Gazi Tigers',
-                teamB: 'Sylhet Falcons',
-                date: '30 Sep',
-                time: '10:00 AM',
-                venue: 'Fatullah',
-              ),
-
-              SizedBox(height: 20.h),
-
-              // -------------------------------------------------------------------
-              // RECENT RESULTS
-              // -------------------------------------------------------------------
-              _SectionHeader(
-                title: 'RECENT RESULTS',
-                action: 'View All',
-                onPressed: () {
-                  final landingController = Get.find<LandingController>();
-                  landingController.curent_index.value = 2;
-                },
-              ),
-
-              SizedBox(height: 8.h),
-
-              const _ResultCard(),
-
-              SizedBox(height: 8.h),
-            ],
-          ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
@@ -306,69 +279,80 @@ class _TournamentCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final landingController = Get.find<LandingController>();
 
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
+    return Obx(() {
+      if (landingController.isLoading.value) {
+        return const Center(child: CircularProgressIndicator());
+      }
+      final tournament = landingController.activeTournament.value;
+      if (tournament == null) {
+        return const SizedBox.shrink();
+      }
+
+      return Card(
+        child: Padding(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Text(
+                      tournament.name,
+                      style: textTheme.titleSmall?.copyWith(
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(width: 8.w),
+
+                  const _StatusChip(
+                    label: 'Ongoing',
+                    type: _StatusType.ongoing,
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 4.h),
+
+              Text(
+                '${tournament.startDate} – ${tournament.endDate} · ${tournament.totalClubs} Clubs',
+                style: textTheme.bodySmall?.copyWith(
+                  fontSize: 12.sp,
+                ),
+              ),
+
+              SizedBox(height: 14.h),
+
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Get.to(()=> TournamentDetailsScreen());
+                  },
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
                   child: Text(
-                    'Dhaka Premier League 2026',
-                    style: textTheme.titleSmall?.copyWith(
-                      fontSize: 16.sp,
+                    'View Tournament ›',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-
-                SizedBox(width: 8.w),
-
-                const _StatusChip(
-                  label: 'Ongoing',
-                  type: _StatusType.ongoing,
-                ),
-              ],
-            ),
-
-            SizedBox(height: 4.h),
-
-            Text(
-              '12 Sep – 30 Oct 2026 · 8 Clubs',
-              style: textTheme.bodySmall?.copyWith(
-                fontSize: 12.sp,
               ),
-            ),
-
-            SizedBox(height: 14.h),
-
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {
-                  Get.to(()=> TournamentDetailsScreen());
-                },
-                style: TextButton.styleFrom(
-                  minimumSize: Size.zero,
-                  padding: EdgeInsets.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                child: Text(
-                  'View Tournament ›',
-                  style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
@@ -554,7 +538,15 @@ class _MatchCard extends StatelessWidget {
 // =============================================================================
 
 class _ResultCard extends StatelessWidget {
-  const _ResultCard();
+  final Match match;
+  final Club clubA;
+  final Club clubB;
+
+  const _ResultCard({
+    required this.match,
+    required this.clubA,
+    required this.clubB,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -562,7 +554,7 @@ class _ResultCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(()=> MatchDetailsScreen());
+        Get.to(() => MatchDetailsScreen());
       },
       child: Card(
         child: Padding(
@@ -574,17 +566,15 @@ class _ResultCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Victoria SC vs Brothers Union',
+                      '${clubA.name} vs ${clubB.name}',
                       style: textTheme.bodyMedium?.copyWith(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-
                     SizedBox(height: 3.h),
-
                     Text(
-                      'Victoria SC won by 6 wickets',
+                      match.result?.summary ?? 'Result not available',
                       style: textTheme.bodySmall?.copyWith(
                         fontSize: 12.sp,
                       ),
@@ -592,9 +582,7 @@ class _ResultCard extends StatelessWidget {
                   ],
                 ),
               ),
-
               SizedBox(width: 8.w),
-
               const _StatusChip(
                 label: 'Completed',
                 type: _StatusType.completed,

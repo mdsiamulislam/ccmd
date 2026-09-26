@@ -1,0 +1,437 @@
+{
+  "meta": {
+    "app": "CCMD Cricket Management Platform - Mobile Demo",
+    "generated": "2026-09-25",
+    "note": "Realistic fictional demo data for CCMD platform.",
+    "dataVersion": "1.0.0"
+  },
+
+  "tournaments": [
+    {
+      "id": "trn_001",
+      "name": "Bangladesh Premier League 2026",
+      "shortName": "BPL 2026",
+      "logoUrl": "https://api.dicebear.com/7.x/shapes/png?seed=BPL2026&backgroundColor=1b5e20",
+      "startDate": "2026-09-12",
+      "endDate": "2026-10-30",
+      "status": "Ongoing",
+      "participatingClubIds": ["clb_001", "clb_002", "clb_003", "clb_004"],
+      "totalClubs": 4,
+      "totalPlayers": 16,
+      "totalMatches": 8,
+      "venueIds": ["ven_001", "ven_002"]
+    }
+  ],
+
+  "clubs": [
+    {
+      "id": "clb_001",
+      "name": "Dhaka Capitals",
+      "logoUrl": "https://api.dicebear.com/7.x/shapes/png?seed=DhakaCapitals&backgroundColor=2e7d32",
+      "representative": "Kamrul Hasan",
+      "contact": {
+        "phone": "+880 1711-223344",
+        "email": "info@dhakacapitals.ccmd.bd"
+      },
+      "homeVenueId": "ven_001",
+      "playerIds": ["ply_001", "ply_002", "ply_003", "ply_004"],
+      "playerCount": 4
+    },
+    {
+      "id": "clb_002",
+      "name": "Chattogram Vikings",
+      "logoUrl": "https://api.dicebear.com/7.x/shapes/png?seed=ChattogramVikings&backgroundColor=c62828",
+      "representative": "Farhana Akter",
+      "contact": {
+        "phone": "+880 1812-556677",
+        "email": "info@chattogramvikings.ccmd.bd"
+      },
+      "homeVenueId": "ven_002",
+      "playerIds": ["ply_005", "ply_006", "ply_007", "ply_008"],
+      "playerCount": 4
+    },
+    {
+      "id": "clb_003",
+      "name": "Sylhet Strikers",
+      "logoUrl": "https://api.dicebear.com/7.x/shapes/png?seed=SylhetStrikers&backgroundColor=1b5e20",
+      "representative": "Mizanur Rahman",
+      "contact": {
+        "phone": "+880 1913-887766",
+        "email": "info@sylhetstrikers.ccmd.bd"
+      },
+      "homeVenueId": "ven_001",
+      "playerIds": ["ply_009", "ply_010", "ply_011", "ply_015"],
+      "playerCount": 4
+    },
+    {
+      "id": "clb_004",
+      "name": "Khulna Tigers",
+      "logoUrl": "https://api.dicebear.com/7.x/shapes/png?seed=KhulnaTigers&backgroundColor=b71c1c",
+      "representative": "Nusrat Jahan",
+      "contact": {
+        "phone": "+880 1614-998877",
+        "email": "info@khulnatigers.ccmd.bd"
+      },
+      "homeVenueId": "ven_002",
+      "playerIds": ["ply_012", "ply_013", "ply_014", "ply_016"],
+      "playerCount": 4
+    }
+  ],
+
+  "players": [
+    {
+      "id": "ply_001",
+      "name": "Arafat Hossain",
+      "registrationId": "CCMD-P-1001",
+      "photoUrl": "https://i.pravatar.cc/300?img=11",
+      "clubId": "clb_001",
+      "dateOfBirth": "1998-03-14",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Batsman",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_002",
+      "name": "Rakibul Islam",
+      "registrationId": "CCMD-P-1002",
+      "photoUrl": "https://i.pravatar.cc/300?img=12",
+      "clubId": "clb_001",
+      "dateOfBirth": "1996-07-22",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "All-rounder",
+      "battingStyle": "Left-hand bat",
+      "bowlingStyle": "Right-arm medium"
+    },
+    {
+      "id": "ply_003",
+      "name": "Shakib Al Noman",
+      "registrationId": "CCMD-P-1003",
+      "photoUrl": "https://i.pravatar.cc/300?img=13",
+      "clubId": "clb_001",
+      "dateOfBirth": "2000-01-05",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Bowler",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "Right-arm fast"
+    },
+    {
+      "id": "ply_004",
+      "name": "Kasun Perera",
+      "registrationId": "CCMD-P-1004",
+      "photoUrl": "https://i.pravatar.cc/300?img=14",
+      "clubId": "clb_001",
+      "dateOfBirth": "1995-11-30",
+      "nationality": "Sri Lanka",
+      "playerType": "Foreign",
+      "role": "Batsman",
+      "battingStyle": "Left-hand bat",
+      "bowlingStyle": "Right-arm off-break"
+    },
+    {
+      "id": "ply_005",
+      "name": "Tanvir Ahmed",
+      "registrationId": "CCMD-P-1005",
+      "photoUrl": "https://i.pravatar.cc/300?img=15",
+      "clubId": "clb_002",
+      "dateOfBirth": "1999-05-18",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Wicketkeeper",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_006",
+      "name": "Imtiaz Chowdhury",
+      "registrationId": "CCMD-P-1006",
+      "photoUrl": "https://i.pravatar.cc/300?img=16",
+      "clubId": "clb_002",
+      "dateOfBirth": "1997-09-09",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Bowler",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "Left-arm orthodox"
+    },
+    {
+      "id": "ply_007",
+      "name": "Sabbir Kabir",
+      "registrationId": "CCMD-P-1007",
+      "photoUrl": "https://i.pravatar.cc/300?img=17",
+      "clubId": "clb_002",
+      "dateOfBirth": "2001-02-27",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "All-rounder",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "Right-arm medium-fast"
+    },
+    {
+      "id": "ply_008",
+      "name": "Lwazi Nkosi",
+      "registrationId": "CCMD-P-1008",
+      "photoUrl": "https://i.pravatar.cc/300?img=18",
+      "clubId": "clb_002",
+      "dateOfBirth": "1994-12-03",
+      "nationality": "South Africa",
+      "playerType": "Foreign",
+      "role": "Bowler",
+      "battingStyle": "Left-hand bat",
+      "bowlingStyle": "Right-arm fast"
+    },
+    {
+      "id": "ply_009",
+      "name": "Nayeem Sarkar",
+      "registrationId": "CCMD-P-1009",
+      "photoUrl": "https://i.pravatar.cc/300?img=19",
+      "clubId": "clb_003",
+      "dateOfBirth": "1998-06-11",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Batsman",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_010",
+      "name": "Foysal Rahman",
+      "registrationId": "CCMD-P-1010",
+      "photoUrl": "https://i.pravatar.cc/300?img=20",
+      "clubId": "clb_003",
+      "dateOfBirth": "2000-08-23",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Bowler",
+      "battingStyle": "Left-hand bat",
+      "bowlingStyle": "Left-arm fast-medium"
+    },
+    {
+      "id": "ply_011",
+      "name": "Mahmudul Karim",
+      "registrationId": "CCMD-P-1011",
+      "photoUrl": "https://i.pravatar.cc/300?img=21",
+      "clubId": "clb_003",
+      "dateOfBirth": "1997-04-02",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "All-rounder",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "Right-arm off-break"
+    },
+    {
+      "id": "ply_015",
+      "name": "Tariqul Islam",
+      "registrationId": "CCMD-P-1015",
+      "photoUrl": "https://i.pravatar.cc/300?img=25",
+      "clubId": "clb_003",
+      "dateOfBirth": "1999-12-12",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Batsman",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_012",
+      "name": "Jubayer Alam",
+      "registrationId": "CCMD-P-1012",
+      "photoUrl": "https://i.pravatar.cc/300?img=22",
+      "clubId": "clb_004",
+      "dateOfBirth": "1999-10-16",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Batsman",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_013",
+      "name": "Ashraful Bari",
+      "registrationId": "CCMD-P-1013",
+      "photoUrl": "https://i.pravatar.cc/300?img=23",
+      "clubId": "clb_004",
+      "dateOfBirth": "1996-01-29",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Wicketkeeper",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    },
+    {
+      "id": "ply_014",
+      "name": "Robiul Islam",
+      "registrationId": "CCMD-P-1014",
+      "photoUrl": "https://i.pravatar.cc/300?img=24",
+      "clubId": "clb_004",
+      "dateOfBirth": "2001-07-08",
+      "nationality": "Bangladesh",
+      "playerType": "Local",
+      "role": "Bowler",
+      "battingStyle": "Left-hand bat",
+      "bowlingStyle": "Right-arm leg-break"
+    },
+    {
+      "id": "ply_016",
+      "name": "Kamran Akmal",
+      "registrationId": "CCMD-P-1016",
+      "photoUrl": "https://i.pravatar.cc/300?img=26",
+      "clubId": "clb_004",
+      "dateOfBirth": "1995-05-15",
+      "nationality": "Pakistan",
+      "playerType": "Foreign",
+      "role": "Wicketkeeper",
+      "battingStyle": "Right-hand bat",
+      "bowlingStyle": "-"
+    }
+  ],
+
+  "umpires": [
+    {
+      "id": "ump_001",
+      "name": "Mohammad Yusuf Ali",
+      "photoUrl": "https://i.pravatar.cc/300?img=51",
+      "age": 47,
+      "contact": {
+        "phone": "+880 1755-112233",
+        "email": "y.ali@ccmd.bd"
+      },
+      "experience": "12 years"
+    },
+    {
+      "id": "ump_002",
+      "name": "Abdur Rob Khan",
+      "photoUrl": "https://i.pravatar.cc/300?img=52",
+      "age": 52,
+      "contact": {
+        "phone": "+880 1766-223344",
+        "email": "r.khan@ccmd.bd"
+      },
+      "experience": "18 years"
+    },
+    {
+      "id": "ump_003",
+      "name": "Selina Parvin",
+      "photoUrl": "https://i.pravatar.cc/300?img=53",
+      "age": 39,
+      "contact": {
+        "phone": "+880 1777-334455",
+        "email": "s.parvin@ccmd.bd"
+      },
+      "experience": "9 years"
+    }
+  ],
+
+  "venues": [
+    {
+      "id": "ven_001",
+      "name": "Sher-e-Bangla National Cricket Stadium",
+      "location": "Mirpur, Dhaka",
+      "status": "Occupied",
+      "capacity": 26000,
+      "imageUrl": "https://api.dicebear.com/7.x/shapes/png?seed=VenueMirpur&backgroundColor=1b5e20"
+    },
+    {
+      "id": "ven_002",
+      "name": "Zahur Ahmed Chowdhury Stadium",
+      "location": "Chattogram",
+      "status": "Available",
+      "capacity": 20000,
+      "imageUrl": "https://api.dicebear.com/7.x/shapes/png?seed=VenueChattogram&backgroundColor=c62828"
+    }
+  ],
+
+  "matches": [
+    {
+      "id": "mtc_001",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": true,
+      "clubAId": "clb_001",
+      "clubBId": "clb_002",
+      "date": "2026-09-12",
+      "time": "14:30",
+      "venueId": "ven_001",
+      "umpireIds": ["ump_001", "ump_002"],
+      "status": "Completed",
+      "result": {
+        "winnerClubId": "clb_001",
+        "summary": "Dhaka Capitals won by 28 runs",
+        "scoreA": "178/6 (20 ov)",
+        "scoreB": "150/9 (20 ov)"
+      }
+    },
+    {
+      "id": "mtc_002",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": false,
+      "clubAId": "clb_003",
+      "clubBId": "clb_004",
+      "date": "2026-09-15",
+      "time": "14:30",
+      "venueId": "ven_002",
+      "umpireIds": ["ump_003"],
+      "status": "Completed",
+      "result": {
+        "winnerClubId": "clb_004",
+        "summary": "Khulna Tigers won by 5 wickets",
+        "scoreA": "142/8 (20 ov)",
+        "scoreB": "146/5 (18.4 ov)"
+      }
+    },
+    {
+      "id": "mtc_003",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": false,
+      "clubAId": "clb_001",
+      "clubBId": "clb_003",
+      "date": "2026-09-27",
+      "time": "14:30",
+      "venueId": "ven_001",
+      "umpireIds": ["ump_001", "ump_003"],
+      "status": "Upcoming",
+      "result": null
+    },
+    {
+      "id": "mtc_004",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": false,
+      "clubAId": "clb_002",
+      "clubBId": "clb_004",
+      "date": "2026-09-30",
+      "time": "15:00",
+      "venueId": "ven_002",
+      "umpireIds": ["ump_002"],
+      "status": "Upcoming",
+      "result": null
+    },
+    {
+      "id": "mtc_005",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": false,
+      "clubAId": "clb_001",
+      "clubBId": "clb_004",
+      "date": "2026-10-05",
+      "time": "14:30",
+      "venueId": "ven_001",
+      "umpireIds": ["ump_001", "ump_002"],
+      "status": "Upcoming",
+      "result": null
+    },
+    {
+      "id": "mtc_006",
+      "tournamentId": "trn_001",
+      "isOpeningMatch": false,
+      "clubAId": "clb_002",
+      "clubBId": "clb_003",
+      "date": "2026-10-15",
+      "time": "15:00",
+      "venueId": "ven_002",
+      "umpireIds": ["ump_003"],
+      "status": "Upcoming",
+      "result": null
+    }
+  ]
+}
